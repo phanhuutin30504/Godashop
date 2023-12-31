@@ -28,7 +28,7 @@ class AuthController {
        }
       $_SESSION['email'] =$email;
       $_SESSION['name'] =$customer->getName();
-      header('location: /');
+      header('location: ?c=customer&a=show');
     }
     function logout()
     {

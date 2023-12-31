@@ -54,6 +54,15 @@
                             <?php endif ?>
                             <span class="product-item-discount"><?=number_format($product->getSalePrice())?>đ</span>
                         </div>
+                        <?php if($product->getInventoryQty()>0): ?>
+                        <div class="input-group">
+                            <input type="number" class="product-quantity form-control" value="1" min="1">
+
+                            <a href="javascript:void(0)" product-id="<?=$product->getId()?>"
+                                class="buy-in-detail btn btn-success cart-add-button"><i
+                                    class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                        </div>
+                        <?php endif ?>
                     </div>
                 </div>
                 <div class="row product-description">

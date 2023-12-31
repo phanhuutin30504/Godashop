@@ -28,10 +28,14 @@
                                     placeholder="Số điện thoại">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" name="password" placeholder="Mật khẩu mới">
+                                <input type="password" class="form-control" name="current_password"
+                                    placeholder="Mật khẩu hiện tại">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" name="re-password"
+                                <input type="password" class="form-control" name="password" placeholder=" mật khẩu mới">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" name="password_confirmation"
                                     placeholder="Nhập lại mật khẩu mới">
                             </div>
                             <div class="form-group">

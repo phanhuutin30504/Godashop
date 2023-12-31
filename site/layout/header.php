@@ -48,10 +48,9 @@
                 </div>
                 <div class="col-md-6 hidden-sm hidden-xs">
                     <ul class="list-inline">
-                        <li><a href="https://www.facebook.com/HocLapTrinhWebTaiNha.ThayLoc"><i
-                                    class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="https://www.facebook.com/tinh.huu.148/"><i class="fab fa-facebook-f"></i></a></li>
                         <li><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="https://www.instagram.com/h.tin05/"><i class="fab fa-instagram"></i></a></li>
                         <li><a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a></li>
                         <li><a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
                     </ul>
@@ -94,7 +93,7 @@
             <div class="row">
                 <!-- LOGO -->
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 logo">
-                    <a href="#"><img src="../upload/goda450x170_1.jpg" class="img-responsive"></a>
+                    <a href="?c=home"><img src="../upload/goda450x170_1.jpg" class="img-responsive"></a>
                 </div>
                 <div class="col-lg-4 col-md-4 hidden-sm hidden-xs call-action">
                     <a href="#"><img src="../upload/godakeben450x170.jpg" class="img-responsive"></a>
@@ -103,9 +102,9 @@
                 <div class="col-lg-4 col-md-4 hotline-search">
                     <div>
                         <p class="hotline-phone"><span><strong>Hotline: </strong><a
-                                    href="tel:0932.538.468">0932.538.468</a></span></p>
+                                    href="tel:0932.538.468">0326.254.914</a></span></p>
                         <p class="hotline-email"><span><strong>Email: </strong><a
-                                    href="mailto:nguyenhuulocla2006@gmail.com">nguyenhuulocla2006@gmail.com</a></span>
+                                    href="mailto:phanhuutin3052004@gmail.com">phanhuutin3052004@gmail.com</a></span>
                         </p>
                     </div>
                     <form class="header-form" action="">
@@ -149,7 +148,7 @@
             <span class="hidden-lg hidden-md experience">Trải nghiệm cùng sản phẩm của Goda</span>
             <ul class="nav navbar-nav navbar-right">
                 <li class="cart"><a href="javascript:void(0)" class="btn-cart-detail" title="Giỏ Hàng"><i
-                            class="fa fa-shopping-cart"></i> <span class="number-total-product">6</span></a></li>
+                            class="fa fa-shopping-cart"></i> <span class="number-total-product"></span></a></li>
             </ul>
         </div>
     </nav>

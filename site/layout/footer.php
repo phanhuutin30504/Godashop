@@ -33,15 +33,16 @@
                         <div class="footerLink">
                             <h4>Liên hệ với chúng tôi </h4>
                             <ul class="list-unstyled">
-                                <li>Phone: 0932.538.468</li>
-                                <li><a href="mailto:nguyenhuulocla2006@gmail.com">Mail:
-                                        nguyenhuulocla2006@gmail.com</a></li>
+                                <li>Phone: 0326.254.914</li>
+                                <li><a href="mailto:phanhuutin3052004@gmail.com">Mail:
+                                        phanhuutin3052004@gmail.com</a></li>
                             </ul>
                             <ul class="list-inline">
-                                <li><a href="https://www.facebook.com/HocLapTrinhWebTaiNha.ThayLoc"><i
+                                <li><a href="https://www.facebook.com/tinh.huu.148/"><i
                                             class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="https://twitter.com"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+                                <li><a href="https://www.instagram.com/h.tin05/"><i class="fab fa-instagram"></i></a>
+                                </li>
                                 <li><a href="https://www.pinterest.com/"><i class="fab fa-pinterest"></i></a></li>
                                 <li><a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
                             </ul>
@@ -78,38 +79,30 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 class="modal-title text-center">Đăng ký</h3>
             </div>
-            <form action="#" method="POST" role="form">
+            <form action="?c=customer&a=register" method="POST" role="form" class="form-register">
                 <div class="modal-body">
                     <div class="form-group">
-                        <input type="text" class="form-control" name="fullname" placeholder="Họ và tên" required
-                            oninvalid="this.setCustomValidity('Vui lòng nhập tên của bạn')"
-                            oninput="this.setCustomValidity('')">
+                        <input type="text" class="form-control" name="fullname" placeholder="Họ và tên">
                     </div>
                     <div class="form-group">
-                        <input type="tel" class="form-control" name="mobile" placeholder="Số điện thoại" required
-                            pattern="[0][0-9]{9,}"
-                            oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại bắt đầu bằng số 0 và ít nhất 9 con số theo sau')"
-                            oninput="this.setCustomValidity('')">
+                        <input type="tel" class="form-control" name="mobile" placeholder="Số điện thoại">
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" name="email" placeholder="Email" required
-                            oninvalid="this.setCustomValidity('Vui lòng nhập email')"
-                            oninput="this.setCustomValidity('')">
+                        <input type="email" class="form-control" name="email" placeholder="Email">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu" required
-                            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
-                            oninvalid="this.setCustomValidity('Vui lòng nhập ít nhất 8 ký tự: số, chữ hoa, chữ thường')"
-                            oninput="this.setCustomValidity('')">
+                        <input type="password" class="form-control" name="password" placeholder="Mật khẩu">
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" name="re-password" placeholder="Nhập lại mật khẩu"
-                            required autocomplete="off" autosave="off" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
-                            oninvalid="this.setCustomValidity('Vui lòng nhập ít nhất 8 ký tự: số, chữ hoa, chữ thường')"
-                            oninput="this.setCustomValidity('')">
+                        <input type="password" class="form-control" name="password_confirmation"
+                            placeholder="Nhập lại mật khẩu">
                     </div>
-                    <div class="form-group g-recaptcha" data-sitekey="6Lcj07oUAAAAALAHcj_WdDa7Vykqzui3mSA5SIoe">
+                    <div class="form-group g-recaptcha" data-sitekey="<?= GOOGLE_RECAPTCHA_SITE ?>">
+
                     </div>
+                    <input type="text" name="hiddenRecaptcha"
+                        style="opacity: 0; position: absolute; top: 0; left: 0; height: 1px; width: 1px;">
+
                     <input type="hidden" name="reference" value="">
                 </div>
                 <div class="modal-footer">
@@ -220,63 +213,9 @@
                         </div>
                     </div>
                     <div class="cart-product">
-                        <hr>
-                        <div class="clearfix text-left">
-                            <div class="row">
-                                <div class="col-sm-6 col-md-1">
-                                    <div><img class="img-responsive" src="../upload/beaumoreSecretWhiteningCream10g.jpg"
-                                            alt="Kem làm trắng da 5 trong 1 Beaumore Secret Whitening Cream "></div>
-                                </div>
-                                <div class="col-sm-6 col-md-3"><a class="product-name" href="#">Kem làm trắng da 5
-                                        trong 1 Beaumore Secret Whitening Cream</a></div>
-                                <div class="col-sm-6 col-md-2"><span class="product-item-discount">190,000₫</span>
-                                </div>
-                                <div class="col-sm-6 col-md-3"><input type="hidden" value="1"><input type="number"
-                                        onchange="updateProductInCart(this,2)" min="1" value="1"></div>
-                                <div class="col-sm-6 col-md-2"><span>190,000₫</span></div>
-                                <div class="col-sm-6 col-md-1"><a class="remove-product" href="javascript:void(0)"
-                                        onclick="deleteProductInCart(2)"><span
-                                            class="glyphicon glyphicon-trash"></span></a></div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="clearfix text-left">
-                            <div class="row">
-                                <div class="col-sm-6 col-md-1">
-                                    <div><img class="img-responsive" src="../upload/suaRuaMatNgheBeaumore100g.jpg"
-                                            alt="Sữa rửa mặt nghệ Beaumore Mới- 100g "></div>
-                                </div>
-                                <div class="col-sm-6 col-md-3"><a class="product-name" href="#">Sữa rửa mặt nghệ
-                                        Beaumore Mới- 100g</a></div>
-                                <div class="col-sm-6 col-md-2"><span class="product-item-discount">250,000₫</span>
-                                </div>
-                                <div class="col-sm-6 col-md-3"><input type="hidden" value="1"><input type="number"
-                                        onchange="updateProductInCart(this,4)" min="1" value="2"></div>
-                                <div class="col-sm-6 col-md-2"><span>500,000₫</span></div>
-                                <div class="col-sm-6 col-md-1"><a class="remove-product" href="javascript:void(0)"
-                                        onclick="deleteProductInCart(4)"><span
-                                            class="glyphicon glyphicon-trash"></span></a></div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="clearfix text-left">
-                            <div class="row">
-                                <div class="col-sm-6 col-md-1">
-                                    <div><img class="img-responsive" src="../upload/suaTamSandrasShowerGel.jpg"
-                                            alt="Sữa tắm Sandras Shower Gel "></div>
-                                </div>
-                                <div class="col-sm-6 col-md-3"><a class="product-name" href="#">Sữa tắm Sandras
-                                        Shower Gel</a></div>
-                                <div class="col-sm-6 col-md-2"><span class="product-item-discount">180,000₫</span>
-                                </div>
-                                <div class="col-sm-6 col-md-3"><input type="hidden" value="1"><input type="number"
-                                        onchange="updateProductInCart(this,7)" min="1" value="3"></div>
-                                <div class="col-sm-6 col-md-2"><span>540,000₫</span></div>
-                                <div class="col-sm-6 col-md-1"><a class="remove-product" href="javascript:void(0)"
-                                        onclick="deleteProductInCart(7)"><span
-                                            class="glyphicon glyphicon-trash"></span></a></div>
-                            </div>
-                        </div>
+
+
+
                     </div>
                 </div>
             </div>
@@ -285,7 +224,7 @@
                     <div class="col-xs-12 text-right">
                         <p>
                             <span>Tổng tiền</span>
-                            <span class="price-total">1,230,000₫</span>
+                            <span class="price-total">₫</span>
                         </p>
                         <input type="button" name="back-shopping" class="btn btn-default" value="Tiếp tục mua sắm">
                         <input type="button" name="checkout" class="btn btn-primary" value="Đặt hàng">

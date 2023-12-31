@@ -10,6 +10,179 @@ function closeMenuMobile() {
 
 
 $(function () {
+    // thêm quận huyện
+    // Thay đổi province
+    $("main .province").change(function (event) {
+        / Act on the event /
+        var province_id = $(this).val();
+        if (!province_id) {
+            updateSelectBox(null, "main .district");
+            updateSelectBox(null, "main .ward");
+            return;
+        }
+
+        $.ajax({
+            url: 'index.php?c=address&a=getDistricts',
+            type: 'GET',
+            data: { province_id: province_id }
+        })
+            .done(function (data) {
+                updateSelectBox(data, "main .district");
+                updateSelectBox(null, "main .ward");
+            });
+
+        if ($("main .shipping-fee").length) {
+            $.ajax({
+                url: 'index.php?c=address&a=getShippingFee',
+                type: 'GET',
+                data: { province_id: province_id }
+            })
+                .done(function (data) {
+                    //update shipping fee and total on UI
+                    let shipping_fee = Number(data);
+                    let payment_total = Number($("main .payment-total").attr("data")) + shipping_fee;
+
+                    $("main .shipping-fee").html(number_format(shipping_fee) + "₫");
+                    $("main .payment-total").html(number_format(payment_total) + "₫");
+                });
+        }
+
+
+    });
+
+    // Thay đổi district
+    $("main .district").change(function (event) {
+        / Act on the event /
+        var district_id = $(this).val();
+        if (!district_id) {
+            updateSelectBox(null, "main .ward");
+            return;
+        }
+
+        $.ajax({
+            url: 'index.php?c=address&a=getWards',
+            type: 'GET',
+            data: { district_id: district_id }
+        })
+            .done(function (data) {
+                updateSelectBox(data, "main .ward");
+            });
+    });
+    $.ajax({
+        url: 'index.php?c=cart&a=display',
+        type: 'GET'
+    })
+        .done(function (data) {
+            displayCart(data);
+
+        });
+    // Thêm sản phẩm vào giỏ hàng bên trong
+    $("main .buy-in-detail").click(function (event) {
+        / Act on the event /
+        var qty = $(this).prev("input").val();
+        var product_id = $(this).attr("product-id");
+        $.ajax({
+            url: 'index.php?c=cart&a=add',
+            type: 'GET',
+            data: { product_id: product_id, qty: qty }
+        })
+            .done(function (data) {
+                displayCart(data);
+
+            });
+    });
+    // / Thêm sản phẩm vào giỏ hàng
+    $("main .buy").click(function (event) {
+
+        var product_id = $(this).attr("product-id");
+        $.ajax({
+            url: 'index.php?c=cart&a=add',
+            type: 'GET',
+            data: { product_id: product_id, qty: 1 }
+        })
+            .done(function (data) {
+                // console.log(data);
+                displayCart(data);
+            });
+    });
+
+    //Validate register form
+    $(".form-register, .reset-password").validate({
+        rules: {
+            // simple rule, converted to {required:true}
+            fullname: {
+                required: true,
+                maxlength: 50,
+                regex:
+                    /^[a-zAZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s]+$/i,
+            },
+            mobile: {
+                required: true,
+                regex: /^0([0-9]{9,9})$/,
+            },
+
+            email: {
+                required: true,
+                maxlength: 50,
+                email: true,
+                // server trả về false là lỗi, true là không lỗi
+                remote: "?c=customer&a=notExistingEmail"
+            },
+
+            password: {
+                required: true,
+                regex: /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+            },
+
+            password_confirmation: {
+                required: true,
+                equalTo: "[name=password]"
+            },
+
+            hiddenRecaptcha: {
+                //true: lỗi
+                //false: passed
+                required: function () {
+                    if (grecaptcha.getResponse() == '') {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            }
+        },
+
+        messages: {
+            fullname: {
+                required: "Vui lòng nhập họ và tên",
+                maxlength: "Vui lòng nhập không quá 50 ký tự",
+                regex: "Vui lòng nhập số và ký tự đặc biệt",
+            },
+            mobile: {
+                required: 'Vui lòng nhập số điện thoại',
+                regex: 'Vui lòng nhập 10 con số bắt đầu là 0',
+            },
+            email: {
+                required: "Vui lòng nhập email",
+                maxlength: "Vui lòng nhập không quá 50 ký tự",
+                email: "Vui lòng nhập đúng định dạng email. vd: mailto:a@gmail.com",
+                remote: "Email đã được đăng ký. Vui lòng nhập lại."
+            },
+            password: {
+                required: "Vui lòng nhập mật khẩu",
+                regex: "Mật khẩu ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt",
+            },
+
+            password_confirmation: {
+                required: "Vui lòng nhập lại mật khẩu",
+                equalTo: "Nhập lại mật khẩu phải trùng khớp",
+            },
+            hiddenRecaptcha: {
+                required: "Vui lòng xác nhận Google reCAPTCHA"
+            }
+        },
+
+    });
     // cập nhật
     $(".info-account").validate({
         rules: {
@@ -346,12 +519,12 @@ $(function () {
 
     $('input[name=checkout]').click(function (event) {
         /* Act on the event */
-        window.location.href = "dat-hang.html";
+        window.location.href = "?c=payment&a=checkout";
     });
 
     $('input[name=back-shopping]').click(function (event) {
         /* Act on the event */
-        window.location.href = "san-pham.html";
+        window.location.href = "?c=product";
     });
 
     // Hiển thị carousel for relative products
@@ -402,3 +575,90 @@ function goToPage(page) {
     window.location.href = newURL;
 }
 
+// Hiển thị cart
+function displayCart(data) {
+
+    //chuyển chuỗi dạng object thành object
+    var cart = JSON.parse(data);
+
+    var total_product_number = cart.total_product_number;
+    $(".btn-cart-detail .number-total-product").html(total_product_number);
+
+    var total_price = cart.total_price;
+    $("#modal-cart-detail .price-total").html(number_format(total_price) + "₫");
+    var items = cart.items;
+    var rows = "";
+    for (let i in items) {
+        let item = items[i];
+        var row =
+            '<hr>' +
+            '<div class="clearfix text-left">' +
+            '<div class="row">' +
+            '<div class="col-sm-6 col-md-1">' +
+            '<div>' +
+            '<img class="img-responsive" src="../upload/' + item.img + '" alt="' + item.name + ' ">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-sm-6 col-md-3">' +
+            '<a class="product-name" href="index.php?c=product&a=detail&id=' + item.product_id + '">' + item.name + '</a>' +
+            '</div>' +
+            '<div class="col-sm-6 col-md-2">' +
+            '<span class="product-item-discount">' + number_format(Math.round(item.unit_price)) + '₫</span>' +
+            '</div>' +
+            '<div class="col-sm-6 col-md-3">' +
+            '<input type="hidden" value="1">' +
+            '<input type="number" onchange="updateProductInCart(this,' + item.product_id + ')" min="1" value="' + item.qty + '">' +
+            '</div>' +
+            '<div class="col-sm-6 col-md-2">' +
+            '<span>' + number_format(Math.round(item.total_price)) + '₫</span>' +
+            '</div>' +
+            '<div class="col-sm-6 col-md-1">' +
+            '<a class="remove-product" href="javascript:void(0)" onclick="deleteProductInCart(' + item.product_id + ')">' +
+            '<span class="glyphicon glyphicon-trash"></span>' +
+            '</a>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+        rows += row;
+    }
+    $("#modal-cart-detail .cart-product").html(rows);
+}
+
+function deleteProductInCart(product_id) {
+    $.ajax({
+        url: 'index.php?c=cart&a=delete',
+        type: 'GET',
+        data: { product_id: product_id }
+    })
+        .done(function (data) {
+            displayCart(data);
+
+        });
+}
+
+// Thay đổi số lượng sản phẩm trong giỏ hàng
+function updateProductInCart(self, product_id) {
+    var qty = $(self).val();
+    $.ajax({
+        url: 'index.php?c=cart&a=update',
+        type: 'GET',
+        data: { product_id: product_id, qty: qty }
+    })
+        .done(function (data) {
+            displayCart(data);
+
+        });
+}
+
+// Cập nhật các option cho thẻ select
+function updateSelectBox(data, selector) {
+    var items = JSON.parse(data);
+    $(selector).find('option').not(':first').remove();
+    if (!data) return;
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        let option = '<option value="' + item.id + '"> ' + item.name + '</option>';
+        $(selector).append(option);
+    }
+
+}
